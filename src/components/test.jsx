@@ -1,23 +1,43 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import styles from '../css/styles.css';
 
-function Test(){
 
-  return (
-    <div>
-      <style jsx> {`
+class Test extends React.Component {
 
-      #test-component {
-        background-color: #242424;
-        color: #FFF;
-      }
-    `}</style>
-      <div id="test-component">
-        <h1>Test Component</h1>
-        <button onClick={this.colorClick}>Click here to change the color</button>
+  constructor(props) {
+    super(props);
+    this.state = {
+      backgroundClass: 'dark'
+    };
+    this.colorClickDark = this.colorClickDark.bind(this);
+    this.colorClickLight = this.colorClickLight.bind(this);
+  }
+
+
+  colorClickDark() {
+    this.setState({backgroundClass: 'dark'});
+    console.log('Theme: ' + this.state.backgroundClass);
+  }
+
+  colorClickLight() {
+    this.setState({backgroundClass: 'light'});
+    console.log('Theme: ' + this.state.backgroundClass);
+  }
+
+  render() {
+    let className = this.state.backgroundClass
+    return (
+      <div>
+        <style jsx>{styles}</style>
+
+          <div id={className}>
+            <h1>Test Component</h1>
+            <button onClick={this.colorClickDark}>Click here to change to dark mode</button>
+            <button onClick={this.colorClickLight}>Click here to change to light mode</button>
+          </div>
       </div>
-    </div>
-  );
-}
+      );
+    }
+  }
 
-export default Test;
+  export default Test;
